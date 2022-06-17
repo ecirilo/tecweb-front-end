@@ -1,0 +1,36 @@
+<span *ngIf="bikeId">
+  <h1>ID: {{ bikeId }}</h1>
+</span>
+<span class="p-float-label">
+    <input id="input-name" type="text" pInputText>
+    <label for="input-name">Nome</label>
+</span>
+<br>
+<span class="p-float-label">
+    <input id="input-marca" type="text" pInputText>
+    <label for="input-marca">Marca</label>
+</span>
+<br>
+<span class="p-float-label">
+    <input id="input-preco" type="text" pInputText>
+    <label for="input-preco">Preço</label>
+</span>
+<br>
+<span class="p-float-label">
+    <input id="input-imagem-url" type="text" pInputText>
+    <label for="input-imagem-url">Imagem URL</label>
+</span>
+<br>
+<span class="p-float-label">
+    <input id="input-site-url" type="text" pInputText>
+    <label for="input-site-url">Site URL</label>
+</span>
+<br>
+<button pButton
+        type="button"
+        icon="pi pi-chevron-circle-left"
+        iconPos="left"
+        label="Cancelar"
+        routerLink="/bikes">
+</button>
+<button pButton type="button" icon="pi pi-check" iconPos="left" label="Salvar"></button>
