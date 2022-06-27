@@ -13,6 +13,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
+        icon:'pi pi-fw pi-home',
+        routerLink: '/'
+      },
+      {
         label: 'Bicicletas',
         icon:'pi pi-fw pi-car',
         routerLink: 'bikes'

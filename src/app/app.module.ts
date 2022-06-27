@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import { CarouselModule } from "primeng/carousel";
 import { ButtonModule } from "primeng/button";
 import { CarouselBikesComponent } from './components/carousel/carousel-bikes.component';
-import {MenubarModule} from "primeng/menubar";
+import { MenubarModule } from "primeng/menubar";
 import { BikesListComponent } from './components/bikes/list/bikes-list.component';
-import {TableModule} from "primeng/table";
+import { TableModule } from "primeng/table";
 import { BikesAddComponent } from './components/bikes/add/bikes-add.component';
-import {InputTextModule} from "primeng/inputtext";
+import { InputTextModule } from "primeng/inputtext";
 import { HomeComponent } from './components/home/home.component';
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxMaskModule } from 'ngx-mask'
 
 @NgModule({
   declarations: [
@@ -28,7 +31,11 @@ import { HomeComponent } from './components/home/home.component';
     ButtonModule,
     MenubarModule,
     TableModule,
-    InputTextModule
+    InputTextModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

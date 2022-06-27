@@ -1,36 +1,91 @@
-<span *ngIf="bikeId">
-  <h1>ID: {{ bikeId }}</h1>
-</span>
-<span class="p-float-label">
-    <input id="input-name" type="text" pInputText>
-    <label for="input-name">Nome</label>
-</span>
-<br>
-<span class="p-float-label">
-    <input id="input-marca" type="text" pInputText>
-    <label for="input-marca">Marca</label>
-</span>
-<br>
-<span class="p-float-label">
-    <input id="input-preco" type="text" pInputText>
-    <label for="input-preco">Preço</label>
-</span>
-<br>
-<span class="p-float-label">
-    <input id="input-imagem-url" type="text" pInputText>
-    <label for="input-imagem-url">Imagem URL</label>
-</span>
-<br>
-<span class="p-float-label">
-    <input id="input-site-url" type="text" pInputText>
-    <label for="input-site-url">Site URL</label>
-</span>
-<br>
-<button pButton
-        type="button"
-        icon="pi pi-chevron-circle-left"
-        iconPos="left"
-        label="Cancelar"
-        routerLink="/bikes">
-</button>
-<button pButton type="button" icon="pi pi-check" iconPos="left" label="Salvar"></button>
+<form name="editForm" (ngSubmit)="save()" [formGroup]="editForm">
+  <div class="card mt-3">
+    <div class="formgrid grid flex justify-content-center">
+      <div class="col-8">
+        <span *ngIf="editForm.get(['id'])!.value">
+          <h1>ID: {{ editForm.get(['id'])!.value }}</h1>
+        </span>
+      </div>
+      <div class="field col-8 mt-3">
+        <span class="p-float-label">
+          <input class="w-full border-round"
+                 id="input-name"
+                 type="text"
+                 formControlName="nome"
+                 pInputText>
+          <label for="input-name">Nome</label>
+        </span>
+        <div *ngIf="editForm.get('nome')!.invalid &&
+             (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+          <span>Nome é obrigatório.</span>
+        </div>
+      </div>
+      <div class="field col-8 mt-3">
+        <span class="p-float-label">
+          <input class="w-full"
+                 id="input-marca"
+                 type="text"
+                 formControlName="marca"
+                 pInputText>
+          <label for="input-marca">Marca</label>
+        </span>
+        <div *ngIf="editForm.get('marca')!.invalid &&
+             (editForm.get('marca')!.dirty || editForm.get('marca')!.touched)">
+          <span>Marca é obrigatório.</span>
+        </div>
+      </div>
+      <div class="field col-8 mt-3">
+        <span class="p-float-label">
+          <input class="w-full"
+                 id="input-preco"
+                 type="text"
+                 formControlName="preco"
+                 pInputText
+                 mask="separator.2"
+                 [allowNegativeNumbers]="true"
+                 thousandSeparator=".">
+          <label for="input-preco">Preço</label>
+        </span>
+        <div *ngIf="editForm.get('preco')!.invalid &&
+             (editForm.get('preco')!.dirty || editForm.get('preco')!.touched)">
+          <span *ngIf="editForm.get('preco')?.errors!['required']">Preço é obrigatório.</span>
+          <span *ngIf="editForm.get('preco')?.errors!['min']">Preço maior do que zero.</span>
+        </div>
+      </div>
+      <div class="field col-8 mt-3">
+        <span class="p-float-label">
+          <input class="w-full"
+                 id="input-site-url"
+                 type="text"
+                 formControlName="site"
+                 pInputText>
+          <label for="input-site-url">Site URL</label>
+        </span>
+      </div>
+      <div class="field col-8 mt-3">
+        <input class="w-full"
+               id="input-imagem-url"
+               type="file"
+               pInputText
+               (change)="setImage($event)">
+        <label for="input-imagem-url">Imagem URL</label>
+      </div>
+      <div class="col-8 flex justify-content-end">
+        <button pButton
+                class="mr-3"
+                type="button"
+                icon="pi pi-chevron-circle-left"
+                iconPos="left"
+                label="Cancelar"
+                routerLink="/bikes">
+        </button>
+        <button pButton
+                type="submit"
+                icon="pi pi-check"
+                iconPos="left"
+                label="Salvar"
+                [disabled]="editForm.invalid"></button>
+      </div>
+    </div>
+  </div>
+</form>
