@@ -17,7 +17,8 @@ export class BikesAddComponent implements OnInit {
     marca: ['',[Validators.required]],
     preco: ['',[Validators.required, Validators.min(0.01)]],
     imagem: [''],
-    site: ['']
+    imagemTipo: [''],
+    url: ['']
   })
 
   constructor(protected activatedRoute: ActivatedRoute,
@@ -42,11 +43,11 @@ export class BikesAddComponent implements OnInit {
     const fileReader: FileReader = new FileReader();
     fileReader.readAsDataURL(file!);
     fileReader.onload = ((e) => {
-      console.log(e.target?.result);
       if ( typeof e.target?.result === 'string') {
         const base64: string = e.target?.result?.substr(e.target?.result.indexOf('base64,') + 'base64,'.length);
         this.editForm.patchValue({
-          imagem: base64
+          imagem: base64,
+          imagemTipo: file?.type
         })
       }
     });
@@ -61,6 +62,10 @@ export class BikesAddComponent implements OnInit {
     }
   }
 
+  imageSource(): string {
+    return `data:${this.editForm.get(['imagemTipo'])!.value};base64,${this.editForm.get(['imagem'])!.value}`;
+  }
+
   private updateForm(bike: Bike): void {
     this.editForm.patchValue({
       id: bike.id,
@@ -68,7 +73,8 @@ export class BikesAddComponent implements OnInit {
       marca: bike.marca,
       preco: bike.preco,
       imagem: bike.imagem,
-      site: bike.site
+      imagemTipo: bike.imagemTipo,
+      url: bike.url
     });
   }
 
@@ -78,8 +84,9 @@ export class BikesAddComponent implements OnInit {
       this.editForm.get(['nome'])!.value,
       this.editForm.get(['marca'])!.value,
       this.editForm.get(['imagem'])!.value,
+      this.editForm.get(['imagemTipo'])!.value,
       this.editForm.get(['preco'])!.value,
-      this.editForm.get(['site'])!.value);
+      this.editForm.get(['url'])!.value);
   }
 
   private sucess(): void {

@@ -4,13 +4,13 @@
       <div class="product-item">
         <div class="product-item-content">
           <div class="mb-3">
-            <img src="{{bike.image}}" class="product-image" />
+            <img [src]="imageSource(bike)" class="product-image" />
           </div>
           <div>
-            <h4 class="mb-1">{{bike.name}} - {{bike.marca}}</h4>
-            <h6 class="mt-0 mb-3">${{bike.price}}</h6>
+            <h4 class="mb-1">{{bike.nome}} - {{bike.marca}}</h4>
+            <h6 class="mt-0 mb-3">${{bike.preco}}</h6>
             <div class="car-buttons mt-5">
-              <a href="{{bike.site}}" class="p-button p-button-rounded mr-2"><i class="pi pi-search"></i></a>
+              <a href="{{bike.url}}" class="p-button p-button-rounded mr-2"><i class="pi pi-search"></i></a>
             </div>
           </div>
         </div>

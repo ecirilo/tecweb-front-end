@@ -4,7 +4,8 @@ export class Bike {
     public nome: string,
     public marca: string,
     public imagem: string | null,
+    public imagemTipo: string | null,
     public preco: number,
-    public site: string | null) {
+    public url: string | null) {
   }
 }
