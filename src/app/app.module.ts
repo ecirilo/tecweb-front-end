@@ -12,12 +12,15 @@ import { TableModule } from "primeng/table";
 import { BikesAddComponent } from './components/bikes/add/bikes-add.component';
 import { InputTextModule } from "primeng/inputtext";
 import { HomeComponent } from './components/home/home.component';
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxMaskModule } from 'ngx-mask'
 import { ImageModule } from 'primeng/image';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import {AuthHttpInterceptor, AuthModule} from "@auth0/auth0-angular";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -42,8 +45,18 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     AvatarModule,
     AvatarGroupModule,
     NgxMaskModule.forRoot(),
+    NgxWebstorageModule.forRoot(),
+    AuthModule.forRoot({...environment.auth,
+      httpInterceptor: {
+        allowedList: [`${environment.dev.serverUrl}/api/v1/*`]
+      }
+    })
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthHttpInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

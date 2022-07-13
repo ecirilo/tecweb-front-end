@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Bike} from "../model/bike.model";
 
@@ -17,15 +17,15 @@ export class BikesService {
     return this.http.get<Bike[]>(this.url);
   }
 
-  get(bikeId: number) : Observable<Bike> {
-    return this.http.get<Bike>(this.url + "/" + bikeId);
+  get(bikeId: number) : Observable<HttpResponse<Bike>> {
+    return this.http.get<Bike>(this.url + "/" + bikeId, { observe: 'response' });
   }
 
-  add(bike: Bike) : Observable<Bike> {
-    return this.http.post<Bike>(this.url, bike);
+  add(bike: Bike) : Observable<HttpResponse<Bike>> {
+    return this.http.post<Bike>(this.url, bike, { observe: 'response' });
   }
 
-  update(bike: Bike) : Observable<Bike> {
-    return this.http.put<Bike>(this.url+ "/" + bike.id, bike);
+  update(bike: Bike) : Observable<HttpResponse<Bike>> {
+    return this.http.put<Bike>(this.url+ "/" + bike.id, bike, { observe: 'response' });
   }
 }

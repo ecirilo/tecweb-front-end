@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {BikesService} from "../bikes/service/bikes-service.service";
-import {Bike} from "../bikes/model/bike.model";
+import { BikesService } from "../bikes/service/bikes-service.service";
+import { Bike } from "../bikes/model/bike.model";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   bikes: Bike[] = [];
 
-  constructor(private bikesService: BikesService) { }
+  constructor(protected bikesService: BikesService) { }
 
   ngOnInit(): void {
     this.bikesService.getAll()

@@ -32,7 +32,7 @@ export class BikesAddComponent implements OnInit {
       if (bikeId) {
         this.bikesService.get(bikeId)
           .subscribe(response => {
-            this.updateForm(response);
+            this.updateForm(response.body!);
           });
       }
     })
@@ -56,7 +56,7 @@ export class BikesAddComponent implements OnInit {
   save() : void {
     const bike: Bike = this.create();
     if (!bike.id) {
-      this.bikesService.add(bike).subscribe(response => this.sucess());
+      this.bikesService.add(bike).subscribe(response => this.router.navigate(['/bikes']));
     } else {
       this.bikesService.update(bike).subscribe(response => this.sucess());
     }
