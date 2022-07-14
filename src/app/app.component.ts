@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,9 @@ import {MenuItem} from "primeng/api";
 export class AppComponent implements OnInit {
   title = 'tecbike';
   items: MenuItem[] = [];
+
+  constructor(protected authService: AuthService) {
+  }
 
   ngOnInit() {
     this.items = [
@@ -20,6 +24,13 @@ export class AppComponent implements OnInit {
         label: 'Bicicletas',
         icon:'pi pi-fw pi-car',
         routerLink: 'bikes'
+      },
+      {
+        label: 'Logout',
+        icon:'pi pi-fw pi-car',
+        command: () => {
+          this.authService.logout();
+        }
       }
     ];
   }
